@@ -167,42 +167,86 @@ export default function DebuffChanceCalculator() {
   };
 
   return (
-    <div className="p-4 min-h-screen bg-gray-900 text-gray-100">
-      <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-4">
-          <h1 className="text-2xl font-bold">Raid: Debuff Chance Calculator</h1>
+    <div className="flex flex-col min-h-screen bg-gray-900 text-gray-100">
+      <header className="bg-gray-800 shadow-lg p-4">
+        <div className="container mx-auto">
+          <h1 className="text-2xl md:text-3xl font-bold">Raid: Debuff Chance Calculator</h1>
+        </div>
+      </header>
+      
+      <main className="flex-grow container mx-auto px-4 py-6 max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="col-span-1 md:col-span-2 bg-gray-800 rounded-lg shadow-lg p-6">
+            <h2 className="text-xl font-semibold mb-4">Calculate Chance</h2>
+            <div className="flex flex-wrap gap-6 mb-6">
+              <label className="flex flex-col flex-grow">
+                <span className="mb-2 text-gray-300">Accuracy</span>
+                <input
+                  type="number"
+                  value={accuracy}
+                  onChange={e => setAccuracy(Number(e.target.value))}
+                  className="border p-3 rounded-md bg-gray-700 text-gray-100 border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-500/50 focus:outline-none transition"
+                />
+              </label>
+              <label className="flex flex-col flex-grow">
+                <span className="mb-2 text-gray-300">Resistance</span>
+                <input
+                  type="number"
+                  value={resistance}
+                  onChange={e => setResistance(Number(e.target.value))}
+                  className="border p-3 rounded-md bg-gray-700 text-gray-100 border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-500/50 focus:outline-none transition"
+                />
+              </label>
+            </div>
+            
+            <div className="p-4 bg-gray-700 rounded-md mb-4">
+              <div className="flex justify-between items-center">
+                <span className="text-gray-300">Accuracy - Resistance:</span>
+                <span className="font-medium">{diff}</span>
+              </div>
+              <div className="flex justify-between items-center mt-2">
+                <span className="text-gray-300">Chance to apply debuff:</span>
+                <span className="text-lg font-bold text-blue-400">{chance.toFixed(2)}%</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-span-1 bg-gray-800 rounded-lg shadow-lg p-6">
+            <h2 className="text-xl font-semibold mb-4">Key Points</h2>
+            <ul className="space-y-3">
+              <li className="flex items-center">
+                <div className="w-3 h-3 rounded-full bg-blue-400 mr-2"></div>
+                <span>50/50 chance at <strong>-42</strong> diff</span>
+              </li>
+              <li className="flex items-center">
+                <div className="w-3 h-3 rounded-full bg-green-400 mr-2"></div>
+                <span>92% chance at <strong>0</strong> diff</span>
+              </li>
+              <li className="flex items-center">
+                <div className="w-3 h-3 rounded-full bg-red-400 mr-2"></div>
+                <span>Min chance: <strong>3%</strong></span>
+              </li>
+              <li className="flex items-center">
+                <div className="w-3 h-3 rounded-full bg-purple-400 mr-2"></div>
+                <span>Max chance: <strong>97%</strong></span>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div className="flex gap-4 mb-4 flex-wrap">
-          <label className="flex flex-col">
-            Accuracy
-            <input
-              type="number"
-              value={accuracy}
-              onChange={e => setAccuracy(Number(e.target.value))}
-              className="border p-2 rounded bg-gray-800 text-gray-100 border-gray-700"
-            />
-          </label>
-          <label className="flex flex-col">
-            Resistance
-            <input
-              type="number"
-              value={resistance}
-              onChange={e => setResistance(Number(e.target.value))}
-              className="border p-2 rounded bg-gray-800 text-gray-100 border-gray-700"
-            />
-          </label>
+        <div className="bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+          <h2 className="text-xl font-semibold mb-4">Success Rate Chart</h2>
+          <div className="h-[500px] md:h-[600px] lg:h-[700px]">
+            <Line data={data} options={options} />
+          </div>
         </div>
+      </main>
 
-        <p className="mb-4">
-          Chance to apply debuff: <strong>{chance.toFixed(2)}%</strong>{' '}
-          (<em>Accuracy - Resistance = {diff}</em>)
-        </p>
-
-        <div className="bg-gray-800 p-4 rounded-lg mb-4" style={{ height: '400px' }}>
-          <Line data={data} options={options} />
+      <footer className="bg-gray-800 p-4 text-center text-sm text-gray-400">
+        <div className="container mx-auto">
+          <p>Based on the in-game debuff chance formula</p>
         </div>
-      </div>
+      </footer>
     </div>
   );
 }
