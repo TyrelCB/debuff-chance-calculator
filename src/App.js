@@ -49,15 +49,15 @@ export default function DebuffChanceCalculator() {
       {
         label: 'Debuff Chance (%)',
         data: yValues,
-        borderColor: 'blue',
+        borderColor: '#63b3ed', // lighter blue for dark mode
         borderWidth: 2,
         fill: false,
       },
       {
         label: 'Your Input',
         data: xValues.map(x => (x === diff ? chance : null)),
-        pointBackgroundColor: 'red',
-        pointBorderColor: 'red',
+        pointBackgroundColor: '#fc8181', // softer red for dark mode
+        pointBorderColor: '#fc8181',
         pointRadius: xValues.map(x => (x === diff ? 6 : 0)),
         showLine: false,
       },
@@ -66,12 +66,20 @@ export default function DebuffChanceCalculator() {
 
   const options = {
     responsive: true,
+    backgroundColor: '#1a202c', // Dark background for the chart
     plugins: {
-      legend: { position: 'top', labels: { color: 'grey' } },
+      legend: { position: 'top', labels: { color: '#e2e8f0' } }, // light gray text
       title: {
         display: true,
         text: 'Debuff Application Chance vs Accuracy - Resistance',
-        color: 'grey',
+        color: '#e2e8f0',
+      },
+      tooltip: {
+        backgroundColor: '#2d3748', // dark gray background
+        titleColor: '#e2e8f0',
+        bodyColor: '#e2e8f0',
+        borderColor: '#4a5568',
+        borderWidth: 1,
       },
       annotation: {
         annotations: {
@@ -79,41 +87,41 @@ export default function DebuffChanceCalculator() {
             type: 'line',
             xMin: -42,
             xMax: -42,
-            borderColor: 'gray',
+            borderColor: '#a0aec0', // medium gray
             borderDash: [6, 6],
             label: {
               content: '50/50 Threshold',
               enabled: true,
               position: 'start',
-              backgroundColor: 'gray',
-              color: 'white',
+              backgroundColor: '#a0aec0',
+              color: '#1a202c',
             },
           },
           attackerAdvantageLine: {
             type: 'line',
             xMin: 0,
             xMax: 0,
-            borderColor: 'green',
+            borderColor: '#68d391', // soft green
             borderDash: [4, 4],
             label: {
               content: 'Attacker Bias',
               enabled: true,
               position: 'start',
-              backgroundColor: 'green',
-              color: 'white',
+              backgroundColor: '#68d391',
+              color: '#1a202c',
             },
           },
           tinyChanceZone: {
             type: 'box',
             yMin: 0,
             yMax: 5,
-            backgroundColor: 'rgba(255, 0, 0, 0.1)',
+            backgroundColor: 'rgba(247, 88, 88, 0.1)',
             label: {
               content: 'Tiny chance zone (≤5%)',
               enabled: true,
               position: 'center',
-              backgroundColor: 'red',
-              color: 'white',
+              backgroundColor: '#fc8181',
+              color: '#1a202c',
             },
           },
         },
@@ -124,11 +132,17 @@ export default function DebuffChanceCalculator() {
         title: {
           display: true,
           text: 'Accuracy - Resistance',
-          color: 'grey',
+          color: '#e2e8f0',
         },
         ticks: {
-          color: 'grey',
+          color: '#e2e8f0',
         },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)',
+        },
+        border: {
+          color: 'rgba(255, 255, 255, 0.3)'
+        }
       },
       y: {
         min: 0,
@@ -136,17 +150,24 @@ export default function DebuffChanceCalculator() {
         title: {
           display: true,
           text: 'Chance to Apply Debuff (%)',
-          color: 'grey',
+          color: '#e2e8f0',
         },
         ticks: {
-          color: 'grey',
+          color: '#e2e8f0',
         },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)',
+        },
+        border: {
+          color: 'rgba(255, 255, 255, 0.3)'
+        }
       },
     },
+    maintainAspectRatio: false,
   };
 
   return (
-    <div className="p-4 min-h-screen bg-black text-white">
+    <div className="p-4 min-h-screen bg-gray-900 text-gray-100">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-4">
           <h1 className="text-2xl font-bold">Raid: Debuff Chance Calculator</h1>
@@ -159,7 +180,7 @@ export default function DebuffChanceCalculator() {
               type="number"
               value={accuracy}
               onChange={e => setAccuracy(Number(e.target.value))}
-              className="border p-2 rounded text-black"
+              className="border p-2 rounded bg-gray-800 text-gray-100 border-gray-700"
             />
           </label>
           <label className="flex flex-col">
@@ -168,7 +189,7 @@ export default function DebuffChanceCalculator() {
               type="number"
               value={resistance}
               onChange={e => setResistance(Number(e.target.value))}
-              className="border p-2 rounded text-black"
+              className="border p-2 rounded bg-gray-800 text-gray-100 border-gray-700"
             />
           </label>
         </div>
@@ -178,7 +199,9 @@ export default function DebuffChanceCalculator() {
           (<em>Accuracy - Resistance = {diff}</em>)
         </p>
 
-        <Line data={data} options={options} />
+        <div className="bg-gray-800 p-4 rounded-lg mb-4" style={{ height: '400px' }}>
+          <Line data={data} options={options} />
+        </div>
       </div>
     </div>
   );
