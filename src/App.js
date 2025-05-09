@@ -244,7 +244,7 @@ export default function DebuffChanceCalculator() {
 
       <footer className="bg-gray-800 p-4 text-center text-sm text-gray-400">
         <div className="container mx-auto">
-          <p>Based on the in-game debuff chance formula</p>
+          <p>Based on information found in this video</p>
         </div>
       </footer>
     </div>
