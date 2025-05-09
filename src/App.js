@@ -169,7 +169,7 @@ export default function DebuffChanceCalculator() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-900 text-gray-100">
       <header className="bg-gray-800 shadow-lg p-4">
-        <div className="container mx-auto">
+        <div className="container mx-auto text-center">
           <h1 className="text-2xl md:text-3xl font-bold">Raid: Debuff Chance Calculator</h1>
         </div>
       </header>
@@ -244,7 +244,17 @@ export default function DebuffChanceCalculator() {
 
       <footer className="bg-gray-800 p-4 text-center text-sm text-gray-400">
         <div className="container mx-auto">
-          <p>Based on information found in this video https://www.youtube.com/watch?v=iMmATDScbb0</p>
+          <p>
+            Based on information found in this{' '}
+            <a 
+              href="https://www.youtube.com/watch?v=iMmATDScbb0" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-blue-400 hover:text-blue-300 underline transition"
+            >
+              video
+            </a>
+          </p>
         </div>
       </footer>
     </div>
