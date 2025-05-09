@@ -178,27 +178,56 @@ export default function DebuffChanceCalculator() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <div className="col-span-1 md:col-span-2 bg-gray-800 rounded-lg shadow-lg p-6">
             <h2 className="text-xl font-semibold mb-4">Calculate Chance</h2>
-            <div className="flex flex-wrap gap-6 mb-6">
-              <label className="flex flex-col flex-grow">
-                <span className="mb-2 text-gray-300">Accuracy</span>
+            
+            {/* Accuracy Input Group */}
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-gray-300">Accuracy</span>
+                <span className="text-gray-300 font-medium">{accuracy}</span>
+              </div>
+              <div className="flex gap-4 items-center">
+                <input
+                  type="range"
+                  min="0"
+                  max="500"
+                  value={accuracy}
+                  onChange={e => setAccuracy(Number(e.target.value))}
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                />
                 <input
                   type="number"
                   value={accuracy}
                   onChange={e => setAccuracy(Number(e.target.value))}
-                  className="border p-3 rounded-md bg-gray-700 text-gray-100 border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-500/50 focus:outline-none transition"
+                  className="border p-2 w-20 rounded-md bg-gray-700 text-gray-100 border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-500/50 focus:outline-none transition text-center"
                 />
-              </label>
-              <label className="flex flex-col flex-grow">
-                <span className="mb-2 text-gray-300">Resistance</span>
+              </div>
+            </div>
+            
+            {/* Resistance Input Group */}
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-gray-300">Resistance</span>
+                <span className="text-gray-300 font-medium">{resistance}</span>
+              </div>
+              <div className="flex gap-4 items-center">
+                <input
+                  type="range"
+                  min="0"
+                  max="500"
+                  value={resistance}
+                  onChange={e => setResistance(Number(e.target.value))}
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-red-500"
+                />
                 <input
                   type="number"
                   value={resistance}
                   onChange={e => setResistance(Number(e.target.value))}
-                  className="border p-3 rounded-md bg-gray-700 text-gray-100 border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-500/50 focus:outline-none transition"
+                  className="border p-2 w-20 rounded-md bg-gray-700 text-gray-100 border-gray-600 focus:border-red-500 focus:ring focus:ring-red-500/50 focus:outline-none transition text-center"
                 />
-              </label>
+              </div>
             </div>
             
+            {/* Results Panel */}
             <div className="p-4 bg-gray-700 rounded-md mb-4">
               <div className="flex justify-between items-center">
                 <span className="text-gray-300">Accuracy - Resistance:</span>

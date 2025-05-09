@@ -17,3 +17,60 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Slider styles for better cross-browser compatibility */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 10px;
+  background: #4b5563;
+  outline: none;
+}
+
+/* Slider thumb for Chrome, Opera, Safari, Edge */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+/* Accuracy slider color */
+input[type="range"].accuracy-slider::-webkit-slider-thumb {
+  background: #3b82f6;
+}
+
+input[type="range"].accuracy-slider::-moz-range-thumb {
+  background: #3b82f6;
+}
+
+input[type="range"].accuracy-slider:active::-webkit-slider-thumb {
+  background: #2563eb;
+}
+
+/* Resistance slider color */
+input[type="range"].resistance-slider::-webkit-slider-thumb {
+  background: #ef4444;
+}
+
+input[type="range"].resistance-slider::-moz-range-thumb {
+  background: #ef4444;
+}
+
+input[type="range"].resistance-slider:active::-webkit-slider-thumb {
+  background: #dc2626;
+}
+
+/* Slider thumb for Firefox */
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
